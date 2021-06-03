@@ -1,13 +1,14 @@
 
 const express = require('express');
 const PORT = 3000;
+const database = require('./src/database')
 const app = express();
 
-/*app.get('/', (req, res) => {
-    console.log(`Probando si funciona`);
-    res.send(`Esto sale del parametro res de app.get`)
+app.get('/tareas', (req, res) => {
+    console.log(`Metodo GET funcionando`);
+    res.json(database.DB)
 });
-*/
+ 
 
 app.use(express.json());
 
