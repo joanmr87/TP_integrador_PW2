@@ -6,10 +6,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do App</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="./css/adminlte.min.css">
 </head>
 
 <body>
-    <h1>Server funcionando</h1>
+    <header class="container">
+        <h1 class="text-center my-4">ToDo App IUPA</h1>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 p-2">
+                <div class="card-header">
+                    <h2 class="text-center">Ingresar nueva tarea</h2>
+                </div>
+                <form action="">
+                    <div class="form-group">
+                        <label for="titulo">Tarea</label>
+                        <input type="text" class="form-control" id="titulo" placeholder="Nombre de la tarea">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-6 p-2">
+                <div class="card-header">
+                    <h2 class="text-center">Lista de tareas</h2>
+                </div>
+
+                <div class="card-body">
+                    <ul class="todo-list" data-widget="todo-list">
+                        <li>
+                            <!-- checkbox -->
+                            <div class="icheck-primary d-inline ml-2">
+                                <input type="checkbox" value="" name="task">
+                                <label for="todoCheck1"></label>
+                            </div>
+                            <!-- todo text -->
+                            <span class="text">Design a nice theme</span>
+                            <!-- General tools such as edit or delete-->
+                            <div class="tools">
+                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 </html>

@@ -7,12 +7,14 @@ Autores: Martin Gonzalez, Facundo Cepeda, Joan M. Romero.
 
 
 Implementar una aplicación para llevar el control de una lista de tareas pendientes (TODOs). Cada tarea está compuesta por un título, una descripción y un estado (pendiente, completada o eliminada). La aplicación debería permitir crear y modificar tareas, cambiarlas de estado y listarlas, teniendo en cuenta las siguientes consideraciones:
-El título es obligatorio.
-La descripción es opcional.
-Sólo deben listarse las tareas que no están en estado eliminado.
-Las tareas deben crearse con estado pendiente, luego pueden pasar al estado completada o eliminada.
-Una tarea pendiente o completada puede eliminarse, pero una tarea eliminada no puede cambiar su estado.
-La aplicación debe contar con un mecanismo de autenticación, y cada usuario debería poder acceder únicamente a las tareas que él creó.
+
+* El título es obligatorio.
+* La descripción es opcional.
+* Sólo deben listarse las tareas que no están en estado eliminado.
+* Las tareas deben crearse con estado pendiente, luego pueden pasar al estado completada o eliminada.
+* Una tarea pendiente o completada puede eliminarse, pero una tarea eliminada no puede cambiar su estado.
+* La aplicación debe contar con un mecanismo de autenticación, y cada usuario debería poder acceder únicamente a las tareas que él creó.
+
 No debe visualizarse la lista de tareas hasta que el usuario inicie sesión.
 No se deben poder realizar acciones hasta que el usuario esté logueado.
 Los usuarios se crearán en la Base de Datos directamente.
