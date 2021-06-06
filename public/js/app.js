@@ -1,25 +1,19 @@
 // Variables
-const loginForm = document.querySelector('#login-form');
+const formTareas = document.querySelector('#form-tareas');
 
 // Listeners
-loginForm.addEventListener('submit', submitLoginForm);
+formTareas.addEventListener('submit', submitFormTarea);
 
-function submitLoginForm(e) {
+function submitFormTarea(e) {
     e.preventDefault();
 
-    // Leo campos del form
-    const user = this.querySelector("[type='email']").value;
-    const pass = this.querySelector("[type='password']").value;
+    const nombre = this.querySelector('#nombre-tarea').value;
+    const descripcion = this.querySelector('#descripcion').value;
 
-    // Primer validacion
-    if (user && pass) {
-        const userData = { user, pass }
-
-
-
+    if (nombre && descripcion) {
+        const tarea = { nombre, descripcion };
+        console.log(tarea);
     } else {
         console.log("Faltan datos");
     }
-
-
 }
