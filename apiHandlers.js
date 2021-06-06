@@ -9,18 +9,18 @@ routingTareas.get('/', (req, res) => {
 });
 
 routingTareas.post('/', (req, res) => {
-    const tarea = req.body.tarea;   
+    const tarea = req.body.tarea;
     const estado = req.body.estado
 
     const tareaDeUsuario = {
         tarea: tarea,
         estado: estado
     };
-    
+
     database.DB.push(tareaDeUsuario);
     res.json(tareaDeUsuario)
     console.log('La tarea fue agregada');
-    
+
 });
 
 module.exports = routingTareas;
