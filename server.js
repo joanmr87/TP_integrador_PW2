@@ -13,25 +13,25 @@ routingTareas.get('/', (req, res) => {
 });
 
 routingTareas.post('/', (req, res) => {
-    let tarea = req.body.tarea;   
+    const tarea = req.body.tarea;   
+    const estado = req.body.estado
+
+    const tareaDeUsuario = {
+        tarea: tarea,
+        estado: estado
+    };
     
-    database.DB.push(tarea);
-    res.json(tarea)
-    console.log('La tarea fue agregada')
+    database.DB.push(tareaDeUsuario);
+    res.json(tareaDeUsuario)
+    console.log('La tarea fue agregada');
     
 });
 
 app.use('/tareas', routingTareas);
-
-
-
-
- 
-
-
 
 app.use(express.static('./public'));
 
 app.listen(PORT, () => {
     console.log(`Escuchando en puerto ${PORT}`)
 });
+

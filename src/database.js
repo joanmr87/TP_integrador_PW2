@@ -2,8 +2,8 @@
 
 const DB = [{
             ID: 1,
-            Tarea: 'Hacer el Trabajo Practico de PW2',
-            Estado: 'Pendiente'
+            tarea: 'Hacer el Trabajo Practico de PW2',
+            estado: 'Pendiente'
             }];
 
 module.exports = {
