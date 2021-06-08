@@ -1,9 +1,14 @@
 /*BASE DE DATOS DE PRUEBA PARA DEJAR HECHOS LOS ROUTING */
 
 const DB = [{
-            ID: 1,
-            tarea: 'Hacer el Trabajo Practico de PW2',
-            estado: 'Pendiente'
+            Id: 1,
+            tarea: 'Programacion web 2',
+            descripcion: 'Hacer las validaciones del post'
+            },
+            {
+             Id: 2,
+             tarea: 'Base de datos',
+             descripcion: 'Hacer el tp'
             }];
 
 module.exports = {

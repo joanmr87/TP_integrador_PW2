@@ -1,11 +1,11 @@
 
 const express = require('express');
-const PORT = 3000;
+const {PORT} = require('./src/config');
 const database = require('./src/database')
 const app = express();
 app.use(express.json());
 
-const routingTareas = require('./apiHandlers')
+const routingTareas = require('./src/routingTareas')
 
 
 app.use('/tareas', routingTareas);
