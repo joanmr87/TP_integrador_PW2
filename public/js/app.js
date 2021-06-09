@@ -1,15 +1,53 @@
 // Variables
-const formTask = document.querySelector('#form-tareas');
 const templateTask = document.querySelector('#task-item').content;
 const taskList = document.querySelector('#task-list');
+const formTask = document.querySelector('#form-tareas');
+const formTitle = document.querySelector('.form-title');
+const taskName = document.querySelector('#task-name');
+const taskDesription = document.querySelector('#task-description');
+const submitButton = document.querySelector('.submit-button');
+const cancelButton = document.querySelector('.cancel-button');
+let editMode = false;
 
 // Listeners
 formTask.addEventListener('submit', submitFormTask);
+cancelButton.addEventListener('click', cancelEdit);
+taskList.addEventListener('click', modifyTasks);
 document.addEventListener('DOMContentLoaded', () => {
     listTasks();
 });
 
-function addTask(name, description, id) {
+function cancelEdit() {
+    formTitle.textContent = "Crear tarea";
+    cancelButton.classList.add('d-none');
+    submitButton.textContent = "Crear";
+    editMode = false;
+}
+
+function modifyTasks(e) {
+    if (e.target.classList.contains('edit-task')) {
+        editTask(e.target.parentElement.parentElement);
+    }
+    if (e.target.classList.contains('delete-task')) {
+        console.log(`Eliminar tarea`)
+    }
+}
+
+function editTask(item) {
+    editMode = true;
+    formTitle.textContent = "Editar tarea";
+    cancelButton.classList.remove('d-none');
+    submitButton.textContent = "Editar";
+    taskName.value = item.querySelector('.task-name').textContent;
+    taskDesription.value = item.querySelector('.task-description').textContent;
+}
+
+async function addTask(name, description, id) {
+
+    // Envio tarea a la BD y recibo el id de la nueva tarea
+    // const response = await callApi('POST', '/', { name, description });
+    // const id = response.json();
+
     const item = templateTask.cloneNode(true);
 
     item.querySelector('.task-name').textContent = name;
@@ -36,21 +74,38 @@ async function callApi(method, url, body = undefined) {
 
 async function listTasks() {
     const tasks = await callApi('GET', '/');
-    console.log(tasks);
+    tasks.forEach((task) => {
+        const { tarea, descripcion, Id } = task;
+        addTask(tarea, descripcion, Id)
+    });
+    console.log(tasks)
+}
 
+function updateTask(name, description, id) {
+    // Envio tarea a la BD y recibo el id de la nueva tarea
+    // const response = await callApi('PUT', '/${id}', { name, description });
+    // const id = response.json();
+
+    // invoco nuevamente al método para listar las tareas de la BD actualizadas
+    listTasks();
 }
 
 function submitFormTask(e) {
     e.preventDefault();
-
-    const name = this.querySelector('#nombre-tarea').value;
-    const description = this.querySelector('#descripcion').value;
+    const name = taskName.value;
+    const description = taskDesription.value;
 
     if (name && description) {
-        const task = { name, description };
-        addTask(name, description, 2)
-        console.log(task);
+        if (!editMode) {
+            addTask(name, description, 2);
+        } else {
+            updateTask(name, description, 2);
+        }
+
     } else {
         console.log("Faltan datos");
     }
+
+    this.reset();
+
 }
