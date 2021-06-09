@@ -14,6 +14,8 @@ body('tarea').notEmpty().withMessage('Campo obligatorio'),
 (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        //BUSCAR LA FORMA DE CAPTURAR msg PARA HACER UN ALERT
+        console.log(errors.errors);
         return res.status(400).json({ errors: errors.array() });
       }
 
@@ -30,5 +32,6 @@ body('tarea').notEmpty().withMessage('Campo obligatorio'),
     console.log('La tarea fue agregada');
     
 });
+
 
 module.exports = routingTareas;
