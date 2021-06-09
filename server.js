@@ -12,7 +12,9 @@ app.use('/tareas', routingTareas);
 
 app.use(express.static('./public'));
 
-app.listen(PORT, () => {
-    console.log(`Escuchando en puerto ${PORT}`)
-});
-
+(async () => {
+    await database.initDB();
+    app.listen(APP_PORT, () => {
+      console.info(`Oyendo en puerto ${APP_PORT}`);
+    });
+  })();
