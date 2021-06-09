@@ -16,7 +16,6 @@ function submitLoginForm(e) {
         const userData = { user, pass }
 
 
-
     } else {
         console.log("Faltan datos");
     }

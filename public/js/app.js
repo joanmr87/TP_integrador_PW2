@@ -14,6 +14,9 @@ formTask.addEventListener('submit', submitFormTask);
 cancelButton.addEventListener('click', cancelEdit);
 taskList.addEventListener('click', modifyTasks);
 document.addEventListener('DOMContentLoaded', () => {
+    if (!sessionStorage.getItem('jwt')) {
+        window.location = '/login.html';
+    }
     listTasks();
 });
 
@@ -29,8 +32,36 @@ function modifyTasks(e) {
         editTask(e.target.parentElement.parentElement);
     }
     if (e.target.classList.contains('delete-task')) {
+        deleteTask(e.target.parentElement.parentElement);
         console.log(`Eliminar tarea`)
     }
+}
+
+function deleteTask(item) {
+
+
+    Swal.fire({
+        title: 'Seguro que querés eliminar esta tarea?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Envio id de la tarea para eliminarla
+            // const response = await callApi('DELETE', '/${id}');
+            // const id = response.json();
+
+            Swal.fire(
+                'Tarea Eliminada!',
+                'La tarea ha sido eliminada',
+                'success'
+            )
+        }
+    })
 }
 
 function editTask(item) {
@@ -98,6 +129,11 @@ function submitFormTask(e) {
     if (name && description) {
         if (!editMode) {
             addTask(name, description, 2);
+            Swal.fire({
+                icon: 'success',
+                title: 'Tarea Agregada',
+                text: 'Su tarea ha sido agregada correctamente',
+            })
         } else {
             updateTask(name, description, 2);
         }
@@ -105,7 +141,5 @@ function submitFormTask(e) {
     } else {
         console.log("Faltan datos");
     }
-
     this.reset();
-
 }
