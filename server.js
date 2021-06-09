@@ -1,7 +1,6 @@
 
 const express = require('express');
 const {PORT} = require('./src/config');
-const database = require('./src/database')
 const app = express();
 app.use(express.json());
 
