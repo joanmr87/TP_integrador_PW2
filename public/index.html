@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <h2 class="text-center">Ingresar nueva tarea</h2>
                 </div>
-                <form id="form-tareas">
+                <form id="form-tareas" class="my-2">
                     <div class="form-group">
                         <label for="nombre-tarea">Tarea</label>
                         <input type="text" class="form-control" id="nombre-tarea" placeholder="Nombre de la tarea">
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="card-body">
-                    <ul class="todo-list" data-widget="todo-list">
+                    <ul id="task-list" class="todo-list" data-widget="todo-list">
                         <li>
                             <!-- checkbox -->
                             <div class="icheck-primary d-inline ml-2">
@@ -58,12 +58,38 @@
                                 <i class="fas fa-edit"></i>
                                 <i class="fas fa-trash"></i>
                             </div>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores eius adipisci
+                                    corporis numquam repellat distinctio eaque</p>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+
+    <template id="task-item">
+        <li>
+            <!-- checkbox -->
+            <div class="icheck-primary d-inline ml-2">
+                <input type="checkbox" value="" name="task">
+                <label for="todoCheck1"></label>
+            </div>
+            <!-- todo text -->
+            <span class="text task-name">Design a nice theme</span>
+            <!-- General tools such as edit or delete-->
+            <div class="tools">
+                <i class="fas fa-edit"></i>
+                <i class="fas fa-trash"></i>
+            </div>
+            <div>
+                <p class="task-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores eius
+                    adipisci
+                    corporis numquam repellat distinctio eaque</p>
+            </div>
+        </li>
+    </template>
 
 
     <script src="./js/app.js"></script>
