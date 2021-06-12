@@ -28,17 +28,17 @@ module.exports = {
     }, 
 
     //LISTAR TAREAS
-    async list(ID_usuario) {
-        const [users] = await connection.execute('SELECT * FROM Tarea WHERE usuario_id = ?',);
-        return tareas;
+    async list(TAREAS) {
+        const [tarea] = await connection.execute('SELECT id_tareas, titulo, descripcion, estado, fecha_creacion FROM TAREAS');
+        return tarea;
   },
     // CREAR TAREAS
   async add(tarea) {
     validateUser(tarea);
-    const { name, descripcion, ID_usuario } = tarea;
+    const { titulo, descripcion, usuario_id } = tarea;
     const [result] = await connection.execute(
-      'INSERT INTO Tarea(titulo, descripcion, usuario_id) VALUES(?, ?, ?)',
-      [name, descripcion, ID_usuario]
+      'INSERT INTO TAREAS(titulo, descripcion, usuario_id) VALUES(?, ?, ?)',
+      [titulo, descripcion, usuario_id]
     );
 
     return await this.find(result.insertId);
@@ -46,7 +46,7 @@ module.exports = {
 
   // Actualiza Datos
 
-  async update(tarea, ID_tarea) {
+  async update(TAREAS, id_tareas) {
     /*const user = await this.find(ID_tarea);
 
     if (!user) {
@@ -73,7 +73,7 @@ module.exports = {
     user.age = newUserData.age;
 */
     await connection.execute(
-      'UPDATE tareas SET titulo = ?, descripcion = ?, fecha_actualizacion = ? WHERE usuario_id = ?',
+      'UPDATE TAREAS SET titulo = ?, descripcion = ?, fecha_actualizacion = ? WHERE usuario_id = ?',
       [tarea.name, tarea.description, tarea.fecha_edicion, ID_tarea]
     );
 
@@ -81,16 +81,16 @@ module.exports = {
   },
 
   async remove(id_tarea) {
-    const user = await this.find(ID_tarea);
+    const user = await this.find(id_tarea);
 
     /*if (!ID_tarea) {
       throw new ResourceNotFoundError(
-        `No existe esa tarea "${userId}"`,        
-       ID_tarea
+        `No existe esa tarea "${tareas.id}"`,        
+       tareas.id
       );
     }*/
 
-    await connection.execute('DELETE FROM users WHERE id = ?', [user.id]);
+    await connection.execute('DELETE FROM TAREAS WHERE id_tareas = ?', [TAREAS.id_tareas]);
   },
 
   //ResourceNotFoundError,
