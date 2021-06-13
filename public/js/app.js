@@ -33,13 +33,23 @@ function modifyTasks(e) {
     }
     if (e.target.classList.contains('delete-task')) {
         deleteTask(e.target.parentElement.parentElement);
-        console.log(`Eliminar tarea`)
+        console.log(`Eliminar tarea`);
+    }
+    if (e.target.classList.contains('task-state')) {
+        changeTaskState(e.target);
     }
 }
 
+function changeTaskState(stateButton) {
+    stateButton.classList.toggle('badge-warning');
+    if (stateButton.classList.toggle('badge-success')) {
+        stateButton.textContent = 'Finalizada';
+    } else {
+        stateButton.textContent = 'Pendiente';
+    };
+}
+
 function deleteTask(item) {
-
-
     Swal.fire({
         title: 'Seguro que querés eliminar esta tarea?',
         // text: "You won't be able to revert this!",
