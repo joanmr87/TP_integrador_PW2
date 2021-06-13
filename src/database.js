@@ -16,23 +16,31 @@ module.exports = {
 }; 
 
 */
+const dotenv = require('dotenv');
+dotenv.config({ path: 'config.env' });
 
 const mysql = require('mysql2/promise');
 const { DB_CONFIG } = require('./config');
-
 let connection;
 
-module.exports = {
-    async initDB() {
-      connection = await mysql.createConnection(DB_CONFIG);
-    }, 
+const schema = process.env.BD_NOMBRE;
+const host = process.env.BD_HOST;
+const port = process.env.BD_PORT;
+const user = process.env.BD_USER;
+const password = process.env.BD_PASS;
 
-    //LISTAR TAREAS
-    async list(TAREAS) {
-        const [tarea] = await connection.execute('SELECT id_tareas, titulo, descripcion, estado, fecha_creacion FROM TAREAS');
-        return tarea;
+module.exports = {
+  async initDB() {
+    // connection = await mysql.createConnection(DB_CONFIG);
+    connection = await mysql.createConnection({ host, port, user, password });
   },
-    // CREAR TAREAS
+
+  //LISTAR TAREAS
+  async list(TAREAS) {
+    const [tarea] = await connection.execute('SELECT id_tareas, titulo, descripcion, estado, fecha_creacion FROM TAREAS');
+    return tarea;
+  },
+  // CREAR TAREAS
   async add(tarea) {
     validateUser(tarea);
     const { titulo, descripcion, usuario_id } = tarea;
