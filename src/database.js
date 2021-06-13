@@ -53,9 +53,9 @@ module.exports = {
 	},
 
 	//LISTAR TAREAS
-	async listTask(tareas) {
-		const [tarea] = await connection.execute('SELECT id, titulo, descripcion, estado, fecha_creacion FROM tareas');
-		return tarea;
+	async listTask() {
+		const [tareas] = await connection.execute('SELECT id, titulo, descripcion, estado, fecha_creacion FROM tareas');
+		return tareas;
 	},
 	// CREAR TAREAS
 	async addTask(tarea) {

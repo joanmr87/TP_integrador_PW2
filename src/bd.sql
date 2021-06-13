@@ -1,27 +1,30 @@
+drop database if exists todo_app;
 create database todo_app;
 use todo_app;
 
+drop table if exists usuarios;
 create table usuarios(
-    id_usuario int auto_increment,
+    id int auto_increment,
     apellido varchar(100) NULL,
     nombre varchar(100)NULL,
-    nombre_usuario varchar(100) NOT NULL,
-    pass varchar(100) NOT NULL,
-    mail varchar(100) NOT NULL,
-    primary key (id_usuario)    
+    usuario varchar(100) NOT NULL,
+    password varchar(100) NOT NULL,
+    email varchar(100) NOT NULL,
+    primary key (id)    
 );
 
+drop table if exists tareas;
 create table tareas(
-    id_tareas int auto_increment,
-    titulo varchar(100),
-    descripcion varchar(100),
-    estado varchar(100),
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_edicion TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    fecha_eliminacion datetime,
-    id_usuario int,
-    primary key (id_tareas),
-    foreign	key	(id_usuario) references usuarios(id_usuario)    
+    id int auto_increment,
+    titulo varchar(100) not null,
+    descripcion text,
+    estado varchar(15) default 'pendiente',
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_edicion DATETIME ON UPDATE CURRENT_TIMESTAMP,
+    fecha_eliminacion DATETIME,
+    usuario_id int,
+    primary key (id),
+    foreign	key	(usuario_id) references usuarios(id)    
 );
 
 insert into usuarios (apellido, nombre, nombre_usuario, pass, mail) value('argenta','pepa','pepaargenta','4321','pepa@argenta.com');
