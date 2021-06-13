@@ -10,9 +10,9 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(express.json({ extended: true }));
 
-// app.use('/api/auth', auth);
 app.use('/api/usuarios', routingUsuarios);
-// app.use('/api/tareas', routingTareas);
+app.use('/api/auth', auth);
+app.use('/api/tareas', routingTareas);
 
 app.use(express.static('./public'));
 

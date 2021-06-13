@@ -36,11 +36,9 @@ module.exports = {
 	},
 
 	async findUser(email) {
-		const [user] = await connection.execute('SELECT `usuario` FROM `usuarios` WHERE `email` = ?', [email]);
+		const [user] = await connection.execute('SELECT `id`, `usuario`, `password` FROM `usuarios` WHERE `email` = ?', [email]);
 
-		console.log(user.length);
-
-		return user.length;
+		return user;
 
 	},
 
