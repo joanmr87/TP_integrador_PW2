@@ -17,8 +17,6 @@ routingTareas.post('/',
             return res.status(400).json({ errors: errors.array() });
         }
 
-
-
         const tareaDeUsuario = {
             Id: req.body.Id,
             tarea: req.body.tarea,
