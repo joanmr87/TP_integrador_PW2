@@ -13,38 +13,39 @@ register.addEventListener('click', toggleForm);
 login.addEventListener('click', toggleForm);
 
 function toggleForm(e) {
-    e.preventDefault();
-    loginBox.classList.toggle('d-none');
-    registerBox.classList.toggle('d-none');
+	e.preventDefault();
+	loginBox.classList.toggle('d-none');
+	registerBox.classList.toggle('d-none');
 
 }
 
 async function submitRegisterForm(e) {
-    console.log("Register form")
-    e.preventDefault();
-    // Leo campos del form
-    const user = this.querySelector("#create-user").value;
-    const email = this.querySelector("#create-email").value;
-    const password = this.querySelector("#create-password").value;
-    const confirmPassword = this.querySelector("#confirm-password").value;
-    console.log({ user, email, password });
+	console.log("Register form")
+	e.preventDefault();
+	// Leo campos del form
+	const usuario = this.querySelector("#create-user").value;
+	const email = this.querySelector("#create-email").value;
+	const password = this.querySelector("#create-password").value;
+	const confirmPassword = this.querySelector("#confirm-password").value;
+	console.log({ usuario, email, password });
 
-    const resultado = await callApi("POST", '/usuarios', JSON.stringify({ user, email, password }), { 'Content-Type': 'application/json' });
+	const resultado = await callApi("POST", '/usuarios', JSON.stringify({ usuario, password, email }), { 'Content-Type': 'application/json' });
+	console.log(resultado);
 }
 
 function submitLoginForm(e) {
-    e.preventDefault();
+	e.preventDefault();
 
-    // Leo campos del form
-    const user = this.querySelector("[type='email']").value;
-    const pass = this.querySelector("[type='password']").value;
+	// Leo campos del form
+	const user = this.querySelector("[type='email']").value;
+	const pass = this.querySelector("[type='password']").value;
 
-    // Primer validacion
-    if (user && pass) {
-        const userData = { user, pass }
+	// Primer validacion
+	if (user && pass) {
+		const userData = { user, pass }
 
 
-    } else {
-        console.log("Faltan datos");
-    }
+	} else {
+		console.log("Faltan datos");
+	}
 }

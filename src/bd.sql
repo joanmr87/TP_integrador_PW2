@@ -1,7 +1,7 @@
-create database Usuarios;
-use Usuarios;
+create database todo_app;
+use todo_app;
 
-create table USUARIOS(
+create table usuarios(
     id_usuario int auto_increment,
     apellido varchar(100) NULL,
     nombre varchar(100)NULL,
@@ -11,7 +11,7 @@ create table USUARIOS(
     primary key (id_usuario)    
 );
 
-create table TAREAS(
+create table tareas(
     id_tareas int auto_increment,
     titulo varchar(100),
     descripcion varchar(100),

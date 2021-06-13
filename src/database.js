@@ -1,18 +1,18 @@
 /*BASE DE DATOS DE PRUEBA PARA DEJAR HECHOS LOS ROUTING 
 
 const DB = [{
-            Id: 1,
-            tarea: 'Programacion web 2',
-            descripcion: 'Hacer las validaciones del post'
-            },
-            {
-             Id: 2,
-             tarea: 'Base de datos',
-             descripcion: 'Hacer el tp'
-            }];
+			Id: 1,
+			tarea: 'Programacion web 2',
+			descripcion: 'Hacer las validaciones del post'
+			},
+			{
+			 Id: 2,
+			 tarea: 'Base de datos',
+			 descripcion: 'Hacer el tp'
+			}];
 
 module.exports = {
-    DB
+	DB
 }; 
 
 */
@@ -30,88 +30,95 @@ const user = process.env.BD_USER;
 const password = process.env.BD_PASS;
 
 module.exports = {
-  async initDB() {
-    // connection = await mysql.createConnection(DB_CONFIG);
-    connection = await mysql.createConnection({ host, port, user, password, database });
-  },
+	async initDB() {
+		// connection = await mysql.createConnection(DB_CONFIG);
+		connection = await mysql.createConnection({ host, port, user, password, database });
+	},
 
-  async createUser(user) {
-    const { usuario, password, email } = user;
-    const [result] = await connection.execute(
-      'INSERT INTO usuarios(usuario, password, email) VALUES(?, ?, ?)',
-      [usuario, password, email]
-    );
+	async findUser(email) {
+		const [user] = await connection.execute('SELECT `usuario` FROM `usuarios` WHERE `email` = ?', [email]);
 
-    console.log(result);
+		console.log(user.length);
 
-    return result.insertId;
-  },
+		return user.length;
 
-  //LISTAR TAREAS
-  async listTask(tareas) {
-    const [tarea] = await connection.execute('SELECT id, titulo, descripcion, estado, fecha_creacion FROM tareas');
-    return tarea;
-  },
-  // CREAR TAREAS
-  async addTask(tarea) {
-    validateUser(tarea);
-    const { titulo, descripcion, usuario_id } = tarea;
-    const [result] = await connection.execute(
-      'INSERT INTO TAREAS(titulo, descripcion, usuario_id) VALUES(?, ?, ?)',
-      [titulo, descripcion, usuario_id]
-    );
+	},
 
-    return await this.find(result.insertId);
-  },
+	async createUser(user) {
+		const { usuario, password, email } = user;
+		const [result] = await connection.execute(
+			'INSERT INTO usuarios(usuario, password, email) VALUES(?, ?, ?)',
+			[usuario, password, email]
+		);
 
-  // Actualiza Datos
+		return result.insertId;
+	},
 
-  async updateTask(TAREAS, id_tareas) {
-    /*const user = await this.find(ID_tarea);
+	//LISTAR TAREAS
+	async listTask(tareas) {
+		const [tarea] = await connection.execute('SELECT id, titulo, descripcion, estado, fecha_creacion FROM tareas');
+		return tarea;
+	},
+	// CREAR TAREAS
+	async addTask(tarea) {
+		validateUser(tarea);
+		const { titulo, descripcion, usuario_id } = tarea;
+		const [result] = await connection.execute(
+			'INSERT INTO TAREAS(titulo, descripcion, usuario_id) VALUES(?, ?, ?)',
+			[titulo, descripcion, usuario_id]
+		);
 
-    if (!user) {
-      throw new ResourceNotFoundError(
-        `No existe un usuario con ID "${userId}"`,
-        'user',
-        userId
-      );
-    }
+		return await this.find(result.insertId);
+	},
 
-    validateUser(newUserData);
+	// Actualiza Datos
 
-    // Actualiza datos
+	async updateTask(TAREAS, id_tareas) {
+		/*const user = await this.find(ID_tarea);
+	
+		if (!user) {
+		  throw new ResourceNotFoundError(
+			`No existe un usuario con ID "${userId}"`,
+			'user',
+			userId
+		  );
+		}
+	
+		validateUser(newUserData);
+	
+		// Actualiza datos
+	
+		if (newUserData.username) {
+		  user.username = newUserData.username;
+		}
+	
+		if (newUserData.password) {
+		  user.password = newUserData.password;
+		}
+	
+		user.name = newUserData.name;
+		user.age = newUserData.age;
+	*/
+		await connection.execute(
+			'UPDATE TAREAS SET titulo = ?, descripcion = ?, fecha_actualizacion = ? WHERE usuario_id = ?',
+			[tarea.name, tarea.description, tarea.fecha_edicion, ID_tarea]
+		);
 
-    if (newUserData.username) {
-      user.username = newUserData.username;
-    }
+		return tarea;
+	},
 
-    if (newUserData.password) {
-      user.password = newUserData.password;
-    }
+	async removeTask(id_tarea) {
+		const user = await this.find(id_tarea);
 
-    user.name = newUserData.name;
-    user.age = newUserData.age;
-*/
-    await connection.execute(
-      'UPDATE TAREAS SET titulo = ?, descripcion = ?, fecha_actualizacion = ? WHERE usuario_id = ?',
-      [tarea.name, tarea.description, tarea.fecha_edicion, ID_tarea]
-    );
+		/*if (!ID_tarea) {
+		  throw new ResourceNotFoundError(
+			`No existe esa tarea "${tareas.id}"`,        
+		   tareas.id
+		  );
+		}*/
 
-    return tarea;
-  },
+		await connection.execute('DELETE FROM TAREAS WHERE id_tareas = ?', [TAREAS.id_tareas]);
+	},
 
-  async removeTask(id_tarea) {
-    const user = await this.find(id_tarea);
-
-    /*if (!ID_tarea) {
-      throw new ResourceNotFoundError(
-        `No existe esa tarea "${tareas.id}"`,        
-       tareas.id
-      );
-    }*/
-
-    await connection.execute('DELETE FROM TAREAS WHERE id_tareas = ?', [TAREAS.id_tareas]);
-  },
-
-  //ResourceNotFoundError,
+	//ResourceNotFoundError,
 };

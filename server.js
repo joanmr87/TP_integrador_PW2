@@ -17,8 +17,8 @@ app.use('/api/usuarios', routingUsuarios);
 app.use(express.static('./public'));
 
 (async () => {
-  await database.initDB();
-  app.listen(PORT, () => {
-    console.info(`Oyendo en puerto ${PORT}`);
-  });
+	await database.initDB();
+	app.listen(PORT, () => {
+		console.info(`Escuchando en puerto ${PORT}`);
+	});
 })();
