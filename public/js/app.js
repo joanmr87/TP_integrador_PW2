@@ -1,3 +1,6 @@
+if (!sessionStorage.getItem('jwt')) {
+    // window.location = '/login.html';
+}
 // Variables
 const templateTask = document.querySelector('#task-item').content;
 const taskList = document.querySelector('#task-list');
@@ -14,9 +17,6 @@ formTask.addEventListener('submit', submitFormTask);
 cancelButton.addEventListener('click', cancelEdit);
 taskList.addEventListener('click', modifyTasks);
 document.addEventListener('DOMContentLoaded', () => {
-    if (!sessionStorage.getItem('jwt')) {
-        window.location = '/login.html';
-    }
     listTasks();
 });
 
@@ -76,7 +76,7 @@ function editTask(item) {
 async function addTask(name, description, id) {
 
     // Envio tarea a la BD y recibo el id de la nueva tarea
-    // const response = await callApi('POST', '/', { name, description });
+    // const response = await callApi('POST', '/', { name, description, id_usuario });
     // const id = response.json();
 
     const item = templateTask.cloneNode(true);

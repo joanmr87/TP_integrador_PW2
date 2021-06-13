@@ -21,8 +21,8 @@
     </header>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 p-2">
+        <div class="row justify-content-center">
+            <div class="col-8 p-2">
                 <div class="card-header">
                     <h2 class="text-center form-title">Crear tarea</h2>
                 </div>
@@ -40,14 +40,46 @@
                     <button type="reset" class="btn btn-danger d-none cancel-button">Cancelar</button>
                 </form>
             </div>
-            <div class="col-md-6 p-2">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 p-2">
                 <div class="card-header">
                     <h2 class="text-center">Lista de tareas</h2>
                 </div>
 
                 <div class="card-body">
                     <ul id="task-list" class="todo-list" data-widget="todo-list">
+                        <li>
+                            <!-- checkbox -->
+                            <!-- <div class="icheck-primary d-inline ml-2">
+                                <input type="checkbox" value="" name="task">
+                                <label for="todoCheck1"></label>
+                            </div> -->
+                            <!-- todo text -->
+                            <span class="text task-name">Design a nice theme</span>
+                            <!-- General tools such as edit or delete-->
+                            <div role="button" class="d-inline-block float-right">
+                                <span class="badge badge-pill badge-warning">Pendiente</span>
+                                <!-- <div class="tools"> -->
+                                <i class="fas fa-edit edit-task text-primary ml-2"></i>
+                                <i class="fas fa-trash delete-task text-danger ml-2"></i>
+                            </div>
+                            <div class="my-2">
+                                <p class="m-0 task-description">Lorem ipsum dolor sit amet consectetur, adipisicing
+                                    elit.
+                                    Dolores eius
+                                    adipisci
+                                    corporis numquam repellat distinctio eaque</p>
+                            </div>
 
+                            <div class="date d-flex align-items-end flex-column">
+                                <p class="m-0"> <small> <span class="font-weight-bold">Creado:</span> yyyy-MM-dd
+                                    </small></p>
+                                <p class="m-0"><small> <span class="font-weight-bold">Modificado:</span> yyyy-MM-dd
+                                    </small></p>
+
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
