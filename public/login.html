@@ -16,15 +16,17 @@
 </head>
 
 <body class="hold-transition login-page">
+
+    <div class="register-logo">
+        <a href=""><b>ToDo</b>APP</a>
+    </div>
+
     <div class="login-box">
-        <div class="login-logo">
-            <p>To Do App</p>
-        </div>
+
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Iniciar Sesion</p>
-
                 <form action="" id="login-form">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email">
@@ -42,10 +44,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-end">
                         <!-- /.col -->
-                        <div class="col-4 align-self-end">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -55,7 +57,7 @@
                     <a href="">Olvidé mi constraseña</a>
                 </p> -->
                 <p class="mb-0">
-                    <a href="#" class="text-center">Registrarse</a>
+                    <a href="" id="register" class="text-center">Registrarse</a>
                 </p>
             </div>
             <!-- /.login-card-body -->
@@ -63,6 +65,62 @@
     </div>
     <!-- /.login-box -->
 
+    <div class="register-box d-none">
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Registrarse</p>
+
+                <form action="" id="register-form">
+                    <div class="input-group mb-3">
+                        <input type="text" id="create-user" class="form-control" placeholder="Nombre de usuario">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" id="create-email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="create-password" class="form-control" placeholder="Constraseña">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="confirm-password" class="form-control"
+                            placeholder="Repetir Constraseña">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+
+                <a href="" id="login" class="text-center">Ya estoy registrado</a>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+
+    <script src="./js/functions.js"></script>
     <script src="./js/login.js"></script>
 </body>
 

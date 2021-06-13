@@ -23,7 +23,7 @@ const mysql = require('mysql2/promise');
 const { DB_CONFIG } = require('./config');
 let connection;
 
-const schema = process.env.BD_NOMBRE;
+const database = process.env.BD_NOMBRE;
 const host = process.env.BD_HOST;
 const port = process.env.BD_PORT;
 const user = process.env.BD_USER;
@@ -32,16 +32,28 @@ const password = process.env.BD_PASS;
 module.exports = {
   async initDB() {
     // connection = await mysql.createConnection(DB_CONFIG);
-    connection = await mysql.createConnection({ host, port, user, password });
+    connection = await mysql.createConnection({ host, port, user, password, database });
+  },
+
+  async createUser(user) {
+    const { usuario, password, email } = user;
+    const [result] = await connection.execute(
+      'INSERT INTO usuarios(usuario, password, email) VALUES(?, ?, ?)',
+      [usuario, password, email]
+    );
+
+    console.log(result);
+
+    return result.insertId;
   },
 
   //LISTAR TAREAS
-  async list(TAREAS) {
-    const [tarea] = await connection.execute('SELECT id_tareas, titulo, descripcion, estado, fecha_creacion FROM TAREAS');
+  async listTask(tareas) {
+    const [tarea] = await connection.execute('SELECT id, titulo, descripcion, estado, fecha_creacion FROM tareas');
     return tarea;
   },
   // CREAR TAREAS
-  async add(tarea) {
+  async addTask(tarea) {
     validateUser(tarea);
     const { titulo, descripcion, usuario_id } = tarea;
     const [result] = await connection.execute(
@@ -54,7 +66,7 @@ module.exports = {
 
   // Actualiza Datos
 
-  async update(TAREAS, id_tareas) {
+  async updateTask(TAREAS, id_tareas) {
     /*const user = await this.find(ID_tarea);
 
     if (!user) {
@@ -88,7 +100,7 @@ module.exports = {
     return tarea;
   },
 
-  async remove(id_tarea) {
+  async removeTask(id_tarea) {
     const user = await this.find(id_tarea);
 
     /*if (!ID_tarea) {

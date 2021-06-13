@@ -98,21 +98,6 @@ async function addTask(name, description, id) {
     taskList.appendChild(item);
 }
 
-/**
- * 
- * @param {'GET' | 'POST' | 'PUT' | 'DELETE'} method 
- * @param {'/' | '/:id'} url 
- * @param {*} body 
- * @returns 
- */
-async function callApi(method, url, body = undefined) {
-    const resp = await fetch(`/tareas${url}`, {
-        method: method
-    });
-    const data = await resp.json();
-    return data;
-}
-
 async function listTasks() {
     const tasks = await callApi('GET', '/');
     tasks.forEach((task) => {
