@@ -59,7 +59,7 @@ module.exports = {
 
 	//LISTAR TAREAS
 	async listTask(userId) {
-		const [tareas] = await connection.execute('SELECT id, titulo, descripcion, estado, fecha_creacion FROM tareas WHERE usuario_id = ?', [userId]);
+		const [tareas] = await connection.execute('SELECT id, titulo, descripcion, estado, fecha_creacion, fecha_edicion FROM tareas WHERE usuario_id = ?', [userId]);
 		return tareas;
 	},
 	// CREAR TAREAS
@@ -85,17 +85,8 @@ module.exports = {
 		return result;
 	},
 
-	async removeTask(id_tarea) {
-		const user = await this.find(id_tarea);
-
-		/*if (!ID_tarea) {
-		  throw new ResourceNotFoundError(
-			`No existe esa tarea "${tareas.id}"`,        
-		   tareas.id
-		  );
-		}*/
-
-		await connection.execute('DELETE FROM TAREAS WHERE id_tareas = ?', [TAREAS.id_tareas]);
+	async deleteTask(id) {
+		await connection.execute('DELETE FROM tareas WHERE id = ?', [id]);
 	},
 
 	//ResourceNotFoundError,

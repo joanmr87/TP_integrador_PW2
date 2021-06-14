@@ -73,3 +73,27 @@ exports.actualizarTarea = async (req, res) => {
 		res.status(500).json({ msg: "Error al actualizar la tarea" });
 	}
 }
+
+
+// Eliminar tarea
+exports.eliminarTarea = async (req, res) => {
+	try {
+		// Revisar si existe la tarea
+		const tarea = await database.findTask(req.params.id);
+
+		if (!tarea.length) {
+			res.status(404).json({ msg: "Tarea no encontrada" });
+		}
+
+		if (tarea[0].usuario_id !== req.usuario.id) {
+			return res.status(401).json({ msg: "No autorizado a eliminar esta tarea" });
+		}
+
+		await database.deleteTask(req.params.id);
+		res.json({ status: 'ok' });
+
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: "Error al actualizar la tarea" });
+	}
+}

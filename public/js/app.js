@@ -43,15 +43,26 @@ function modifyTasks(e) {
 }
 
 function changeTaskState(stateButton) {
+	const item = stateButton.parentElement.parentElement;
+	const name = item.querySelector('.task-name').textContent;
+	const description = item.querySelector('.task-description').textContent;
+
 	stateButton.classList.toggle('badge-warning');
+
 	if (stateButton.classList.toggle('badge-success')) {
-		stateButton.textContent = 'Finalizada';
+		stateButton.textContent = 'finalizada';
 	} else {
-		stateButton.textContent = 'Pendiente';
+		stateButton.textContent = 'pendiente';
 	};
+
+	updateTask(name, description, item.dataset.id, stateButton.textContent);
+
 }
 
 function deleteTask(item) {
+	const name = item.querySelector('.task-name').textContent;
+	const description = item.querySelector('.task-description').textContent;
+	const id = item.dataset.id;
 	Swal.fire({
 		title: 'Seguro que querés eliminar esta tarea?',
 		// text: "You won't be able to revert this!",
@@ -61,11 +72,10 @@ function deleteTask(item) {
 		cancelButtonColor: '#d33',
 		confirmButtonText: 'Confirmar',
 		cancelButtonText: 'Cancelar'
-	}).then((result) => {
+	}).then(async (result) => {
 		if (result.isConfirmed) {
 			// Envio id de la tarea para eliminarla
-			// const response = await callApi('DELETE', '/${id}');
-			// const id = response.json();
+			updateTask(name, description, id, 'eliminada');
 
 			Swal.fire(
 				'Tarea Eliminada!',
@@ -96,14 +106,21 @@ async function addTask(name, description) {
 	addHTMLTask(name, description, id, 'pendiente', new Date().toISOString().slice(0, 19).replace('T', ' '));
 }
 
-function addHTMLTask(name, description, id, state, create_date) {
+function addHTMLTask(name, description, id, state, create_date, edited_date) {
 	const item = templateTask.cloneNode(true);
 
 	item.querySelector('.task-name').textContent = name;
 	item.querySelector('.task-description').textContent = description;
 	item.querySelector('li').dataset.id = id;
 	item.querySelector('.creation-date').textContent = create_date;
+	item.querySelector('.edited-date').textContent = edited_date;
 	item.querySelector('.task-state').textContent = state;
+
+	if (state == "pendiente") {
+		item.querySelector('.task-state').classList.add('badge-warning')
+	} else {
+		item.querySelector('.task-state').classList.add('badge-success')
+	}
 
 	taskList.appendChild(item);
 }
@@ -118,9 +135,11 @@ async function listTasks() {
 
 	taskList.innerHTML = '';
 
-	result.forEach((task) => {
-		const { titulo, descripcion, id, estado, fecha_creacion } = task;
-		addHTMLTask(titulo, descripcion, id, estado, fecha_creacion)
+	const tareas = result.filter(tarea => tarea.estado !== 'eliminada');
+
+	tareas.forEach((task) => {
+		const { titulo, descripcion, id, estado, fecha_creacion, fecha_edicion } = task;
+		addHTMLTask(titulo, descripcion, id, estado, fecha_creacion, fecha_edicion)
 	});
 }
 
@@ -131,7 +150,7 @@ async function updateTask(name, description, id, state) {
 	if (response.status === "ok") {
 		Swal.fire({
 			icon: 'success',
-			title: 'Tarea Actualizada',
+			title: `Tarea ${(state == "eliminada") ? "Eliminada" : "Actualizada"}`,
 			text: 'Su tarea ha sido actualizada correctamente',
 		})
 		listTasks();
@@ -156,6 +175,10 @@ function submitFormTask(e) {
 			})
 		} else {
 			updateTask(name, description, taskId.value, taskStatus.value);
+			formTitle.textContent = "Crear tarea";
+			submitButton.textContent = "Crear";
+			editMode = false;
+			cancelButton.classList.add('d-none');
 		}
 
 	} else {

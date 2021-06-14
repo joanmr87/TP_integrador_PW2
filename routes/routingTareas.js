@@ -27,4 +27,8 @@ routingTareas.put('/:id',
 	tareaController.actualizarTarea
 );
 
+// Eliminar tarea
+// /api/tareas/id
+routingTareas.delete('/:id', tareaController.eliminarTarea);
+
 module.exports = routingTareas;
