@@ -27,13 +27,3 @@ create table tareas(
     foreign	key	(usuario_id) references usuarios(id)    
 );
 
-insert into usuarios (apellido, nombre, nombre_usuario, pass, mail) value('argenta','pepa','pepaargenta','4321','pepa@argenta.com');
-insert into tareas (titulo, descripcion, estado) value ('Tarea 3', 'descripcion', 'estado');
-
-SELECT * from USUARIOS;
-SELECT * from TAREAS;
-
-update tareas set titulo = 'titulos2', estado = 'finalizado'  where id_tareas = 1;
-delete from tareas where id_tareas = 1; 
-
-SELECT * FROM tareas =, WHERE ID_usuario = 2;

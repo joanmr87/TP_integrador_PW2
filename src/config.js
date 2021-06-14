@@ -1,10 +1,10 @@
 module.exports = {
-    PORT: 3000,
+    PORT: 3306,
     JWT_SECRET: '****',
     DB_CONFIG: {
       host: 'localhost',
-      user: '***',
-      password: '***',
+      user: 'root',
+      password: '123456',
       database: 'diplomatura',
     },
   };
