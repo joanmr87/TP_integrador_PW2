@@ -1,21 +1,30 @@
 const express = require('express');
-const database = require('../src/database')
 const { body, validationResult } = require('express-validator');
 const tareaController = require('../controllers/tareaController');
-const auth = require('../middleware/auth');
+const { check } = require('express-validator');
 
 const routingTareas = express.Router();
 
 // Listar tareas
 // /api/tareas
-routingTareas.get('/', async (req, res) => {
-
-	const tareas = await database.listTask();
-	res.json(tareas);
-});
+routingTareas.get('/', tareaController.obtenerTareas);
 
 // Crear una tarea
 // /api/tareas
-routingTareas.post('/', tareaController.crearTarea);
+routingTareas.post('/',
+	[
+		check('name', 'El nombre de la tarea es obligatorio').not().isEmpty()
+	],
+	tareaController.crearTarea
+);
+
+// Actualizar una tarea
+// /api/tareas/id
+routingTareas.put('/:id',
+	[
+		check('name', 'El nombre de la tarea es obligatorio').not().isEmpty()
+	],
+	tareaController.actualizarTarea
+);
 
 module.exports = routingTareas;

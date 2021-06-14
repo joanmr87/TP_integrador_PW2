@@ -2,115 +2,121 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do App</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="./css/font-awesome.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="./css/adminlte.min.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>To Do App</title>
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="./css/adminlte.min.css">
 </head>
 
 <body>
-    <header class="container">
-        <h1 class="text-center my-4">ToDo App IUPA</h1>
-    </header>
+	<header class="container">
+		<h1 class="text-center my-4">ToDo App IUPA</h1>
+	</header>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-8 p-2">
-                <div class="card-header">
-                    <h2 class="text-center form-title">Crear tarea</h2>
-                </div>
-                <form id="form-tareas" class="my-2">
-                    <div class="form-group">
-                        <label for="nombre-tarea">Tarea</label>
-                        <input type="text" class="form-control" id="task-name" placeholder="Nombre de la tarea">
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcion">Descripción</label>
-                        <textarea class="form-control" id="task-description" rows="3"
-                            placeholder="Descripción de la tarea"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary submit-button">Crear</button>
-                    <button type="reset" class="btn btn-danger d-none cancel-button">Cancelar</button>
-                </form>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-8 p-2">
-                <div class="card-header">
-                    <h2 class="text-center">Lista de tareas</h2>
-                </div>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-8 p-2">
+				<div class="card-header">
+					<h2 class="text-center form-title">Crear tarea</h2>
+				</div>
+				<form id="form-tareas" class="my-2">
+					<div class="form-group">
+						<label for="nombre-tarea">Tarea</label>
+						<input type="text" class="form-control" id="task-name" placeholder="Nombre de la tarea">
+					</div>
+					<div class="form-group">
+						<label for="descripcion">Descripción</label>
+						<textarea class="form-control" id="task-description" rows="3"
+							placeholder="Descripción de la tarea"></textarea>
+					</div>
+					<input type="hidden" id="task-status" value="">
+					<input type="hidden" id="task-id" value="">
+					<button type="submit" class="btn btn-primary submit-button">Crear</button>
+					<button type="reset" class="btn btn-danger d-none cancel-button">Cancelar</button>
+				</form>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-8 p-2">
+				<div class="card-header">
+					<h2 class="text-center">Lista de tareas</h2>
+				</div>
 
-                <div class="card-body">
-                    <ul id="task-list" class="todo-list" data-widget="todo-list">
-                        <li>
-                            <!-- checkbox -->
-                            <!-- <div class="icheck-primary d-inline ml-2">
-                                <input type="checkbox" value="" name="task">
-                                <label for="todoCheck1"></label>
-                            </div> -->
-                            <!-- todo text -->
-                            <span class="text task-name">Design a nice theme</span>
-                            <!-- General tools such as edit or delete-->
-                            <div role="button" class="d-inline-block float-right">
-                                <span class="badge badge-pill badge-warning task-state">Pendiente</span>
-                                <!-- <div class="tools"> -->
-                                <i class="fas fa-edit edit-task text-primary ml-2"></i>
-                                <i class="fas fa-trash delete-task text-danger ml-2"></i>
-                            </div>
-                            <div class="my-2">
-                                <p class="m-0 task-description">Lorem ipsum dolor sit amet consectetur, adipisicing
-                                    elit.
-                                    Dolores eius
-                                    adipisci
-                                    corporis numquam repellat distinctio eaque</p>
-                            </div>
+				<div class="card-body">
+					<ul id="task-list" class="todo-list" data-widget="todo-list">
+						<!-- <li>
 
-                            <div class="date d-flex align-items-end flex-column">
-                                <p class="m-0"> <small> <span class="font-weight-bold">Creado:</span> yyyy-MM-dd
-                                    </small></p>
-                                <p class="m-0"><small> <span class="font-weight-bold">Modificado:</span> yyyy-MM-dd
-                                    </small></p>
+							<span class="text task-name">Design a nice theme</span>
 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+							<div role="button" class="d-inline-block float-right">
+								<span class="badge badge-pill badge-warning task-state">Pendiente</span>
 
-    <template id="task-item">
-        <li>
-            <!-- checkbox -->
-            <div class="icheck-primary d-inline ml-2">
-                <input type="checkbox" value="" name="task">
-                <label for="todoCheck1"></label>
-            </div>
-            <!-- todo text -->
-            <span class="text task-name">Design a nice theme</span>
-            <!-- General tools such as edit or delete-->
-            <div class="tools">
-                <i class="fas fa-edit edit-task"></i>
-                <i class="fas fa-trash delete-task"></i>
-            </div>
-            <div>
-                <p class="task-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores eius
-                    adipisci
-                    corporis numquam repellat distinctio eaque</p>
-            </div>
-        </li>
-    </template>
+								<i class="fas fa-edit edit-task text-primary ml-2"></i>
+								<i class="fas fa-trash delete-task text-danger ml-2"></i>
+							</div>
+							<div class="my-2">
+								<p class="m-0 task-description">Lorem ipsum dolor sit amet consectetur, adipisicing
+									elit.
+									Dolores eius
+									adipisci
+									corporis numquam repellat distinctio eaque</p>
+							</div>
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./js/functions.js"></script>
-    <script src="./js/app.js"></script>
+							<div class="date d-flex align-items-end flex-column">
+								<p class="m-0"> <small> <span class="font-weight-bold">Creado:</span> yyyy-MM-dd
+									</small></p>
+								<p class="m-0"><small> <span class="font-weight-bold">Modificado:</span> yyyy-MM-dd
+									</small></p>
+
+							</div>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<template id="task-item">
+		<li>
+			<!-- todo text -->
+			<span class="text task-name">Design a nice theme</span>
+			<!-- General tools such as edit or delete-->
+			<div role="button" class="d-inline-block float-right">
+				<span class="badge badge-pill badge-warning task-state">Pendiente</span>
+				<!-- <div class="tools"> -->
+				<i class="fas fa-edit edit-task text-primary ml-2"></i>
+				<i class="fas fa-trash delete-task text-danger ml-2"></i>
+			</div>
+			<div class="my-2">
+				<p class="m-0 task-description">Lorem ipsum dolor sit amet consectetur, adipisicing
+					elit.
+					Dolores eius
+					adipisci
+					corporis numquam repellat distinctio eaque</p>
+			</div>
+
+			<div class="date d-flex align-items-end flex-column">
+				<p class="m-0"> <small> <span class="font-weight-bold">Creado:</span> <span class="creation-date">
+							yyyy-MM-dd</span>
+					</small></p>
+				<p class="m-0"><small> <span class="font-weight-bold">Modificado:</span><span class="edited-date">
+							yyyy-MM-dd</span>
+					</small></p>
+
+			</div>
+		</li>
+	</template>
+
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="./js/functions.js"></script>
+	<script src="./js/app.js"></script>
 </body>
 
 </html>

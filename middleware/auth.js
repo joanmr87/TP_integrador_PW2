@@ -4,7 +4,6 @@ module.exports = function (req, res, next) {
 	// Leer el token del header
 	const headerAuth = req.header('Authorization');
 
-
 	// Revisar si no hay token
 	if (!headerAuth) {
 		return res.status(401).json({ msg: "No autorizado" });
@@ -16,7 +15,7 @@ module.exports = function (req, res, next) {
 		req.usuario = cifrado.usuario;
 		next();
 	} catch (error) {
-		res.status(401).json({ msg: "Token no valido" });
+		res.status(401).json({ status: 'error', msg: "Token no valido" });
 	}
 
 

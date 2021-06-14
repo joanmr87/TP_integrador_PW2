@@ -5,12 +5,12 @@
  * @param {*} body 
  * @returns 
  */
-async function callApi(method, url, body = {}, headers = {}) {
-    const resp = await fetch(`/api${url}`, {
-        method: method,
-        body: body,
-        headers: headers
-    });
-    const data = await resp.json();
-    return data;
+async function callApi(method, url, headers = undefined, body = undefined) {
+	const resp = await fetch(`/api${url}`, {
+		method: method,
+		body: body,
+		headers: headers
+	});
+	const data = await resp.json();
+	return data;
 }

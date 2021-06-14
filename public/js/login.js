@@ -27,23 +27,31 @@ async function submitRegisterForm(e) {
 	const email = this.querySelector("#create-email").value;
 	const password = this.querySelector("#create-password").value;
 	const confirmPassword = this.querySelector("#confirm-password").value;
-	console.log({ usuario, email, password });
 
-	const resultado = await callApi("POST", '/usuarios', JSON.stringify({ usuario, password, email }), { 'Content-Type': 'application/json' });
-	console.log(resultado);
+	const resultado = await callApi("POST", '/usuarios', { 'Content-Type': 'application/json' }, JSON.stringify({ usuario, password, email }));
+
+	if (resultado.token) {
+		sessionStorage.setItem('jwt', resultado.token);
+	}
 }
 
-function submitLoginForm(e) {
+async function submitLoginForm(e) {
 	e.preventDefault();
 
 	// Leo campos del form
-	const user = this.querySelector("[type='email']").value;
-	const pass = this.querySelector("[type='password']").value;
+	const email = this.querySelector("[type='email']").value;
+	const password = this.querySelector("[type='password']").value;
 
 	// Primer validacion
-	if (user && pass) {
-		const userData = { user, pass }
+	if (email && password) {
+		const response = await callApi("POST", '/auth', { 'Content-Type': 'application/json' }, JSON.stringify({ password, email }));
 
+		if (response.token) {
+			sessionStorage.setItem('jwt', response.token);
+			window.location = '/index.html';
+		} else {
+			console.log("error en login")
+		}
 
 	} else {
 		console.log("Faltan datos");
