@@ -12,12 +12,18 @@ const taskStatus = document.querySelector('#task-status');
 const taskId = document.querySelector('#task-id');
 const submitButton = document.querySelector('.submit-button');
 const cancelButton = document.querySelector('.cancel-button');
+const logoutButton = document.querySelector('#logout');
 let editMode = false;
 
 // Listeners
 formTask.addEventListener('submit', submitFormTask);
 cancelButton.addEventListener('click', cancelEdit);
 taskList.addEventListener('click', modifyTasks);
+logoutButton.addEventListener('click', (e) => {
+	e.preventDefault();
+	sessionStorage.removeItem('jwt');
+	window.location = '/login.html';
+})
 document.addEventListener('DOMContentLoaded', () => {
 	listTasks();
 });
