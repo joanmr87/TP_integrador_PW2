@@ -28,7 +28,18 @@ async function submitRegisterForm(e) {
 	const password = this.querySelector("#create-password").value;
 	const confirmPassword = this.querySelector("#confirm-password").value;
 
+	if (password !== confirmPassword) {
+		Swal.fire({
+			icon: 'error',
+			title: 'Error',
+			text: 'Las contraseñas ingresadas deben ser iguales'
+		})
+		return;
+	}
+
 	const resultado = await callApi("POST", '/usuarios', { 'Content-Type': 'application/json' }, JSON.stringify({ usuario, password, email }));
+
+	console.log(resultado);
 
 	if (resultado.token) {
 		sessionStorage.setItem('jwt', resultado.token);
