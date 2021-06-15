@@ -20,7 +20,6 @@ function toggleForm(e) {
 }
 
 async function submitRegisterForm(e) {
-	console.log("Register form")
 	e.preventDefault();
 	// Leo campos del form
 	const usuario = this.querySelector("#create-user").value;
@@ -39,10 +38,10 @@ async function submitRegisterForm(e) {
 
 	const resultado = await callApi("POST", '/usuarios', { 'Content-Type': 'application/json' }, JSON.stringify({ usuario, password, email }));
 
-	console.log(resultado);
 
 	if (resultado.token) {
 		sessionStorage.setItem('jwt', resultado.token);
+		window.location = '/index.html';
 	}
 }
 

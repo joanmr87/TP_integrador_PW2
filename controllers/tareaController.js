@@ -21,8 +21,6 @@ exports.crearTarea = async (req, res) => {
 
 	const idTarea = await db.addTask(tarea, req.usuario.id);
 	res.json(idTarea);
-	console.log('La tarea fue agregada');
-
 }
 
 // Obtener listado de tareas
@@ -69,7 +67,6 @@ exports.actualizarTarea = async (req, res) => {
 		res.json({ status: 'ok', affectedRows: resultado.affectedRows });
 
 	} catch (error) {
-		console.log(error);
 		res.status(500).json({ msg: "Error al actualizar la tarea" });
 	}
 }
@@ -93,7 +90,6 @@ exports.eliminarTarea = async (req, res) => {
 		res.json({ status: 'ok' });
 
 	} catch (error) {
-		console.log(error);
 		res.status(500).json({ msg: "Error al actualizar la tarea" });
 	}
 }
